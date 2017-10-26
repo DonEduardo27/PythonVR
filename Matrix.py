@@ -67,24 +67,6 @@ class TMatrix:
                     for y in range (0,4):
                         returnArray[x] = returnArray[x] + (self.Array[4*x + y] * vector.Array[x])
                 return Vector4(returnArray[0],returnArray[1],returnArray[2],returnArray[3])
- 
- 
-        def make_trans_mat(self,x,y,z):
-                a = [0,0,0,x,0,0,0,y,0,0,0,z,0,0,0,1]
-                self.Array = a
-
-        def make_rot_mat(self,phi, axis):
-                if(axis == "x"):
-                    a = [1,0,0,0,math.cos(phi),-math.sin(phi),0,0,math.sin(phi),math.cos(phi),0,0,0,0,1]
-                if(axis == "y"):
-                    a = [math.cos(phi),0,math.sin(phi),0, 0,1,0,0, -math.sin(phi),0,math.cos(phi),0, 0,0,0,1]
-                if(axis == "z"):
-                    a = [math.cos(phi),-math.sin(phi),0,0 ,math.sin(phi),math.cos(phi),0,0, 0,0,1,0,0,0,0,1]
-                self.Array = a
-
-        def make_scale_mat(self,x,y,z):
-                a(x,0,0,0, 0,y,0,0, 0,0,z,0, 0,0,0,1)
-                self.Array = a
 
         def printMat(self):
                 print("|"  +str(self.Array[0])+ ", " +str(self.Array[1])+ ", " +str(self.Array[2])+ ", " +str(self.Array[3])+"|")
@@ -92,6 +74,23 @@ class TMatrix:
                 print("|" +str(self.Array[8])+ ", " +str(self.Array[9])+ ", " +str(self.Array[10]) + ", "+ str(self.Array[11])+"|")
                 print("|" +str(self.Array[12])+ ", " +str(self.Array[13])+ ", " +str(self.Array[14])+ ", " +str(self.Array[15])+"|")
                 print(" ")
+
+
+def make_trans_mat(x,y,z):
+        return TMatrix (0,0,0,x,0,0,0,y,0,0,0,z,0,0,0,1)
+
+def make_rot_mat(phi,axis):
+        if(axis == "x"):
+            return TMatrix (1,0,0,0,math.cos(phi),-math.sin(phi),0,0,math.sin(phi),math.cos(phi),0,0,0,0,0,1)
+        if(axis == "y"):
+            return TMatrix (math.cos(phi),0,math.sin(phi),0, 0,1,0,0, -math.sin(phi),0,math.cos(phi),0, 0,0,0,1)
+        if(axis == "z"):
+            return TMatrix (math.cos(phi),-math.sin(phi),0,0 ,math.sin(phi),math.cos(phi),0,0, 0,0,1,0,0,0,0,1)
+
+def make_scale_mat(x,y,z):
+        return TMatrix(x,0,0,0, 0,y,0,0, 0,0,z,0, 0,0,0,1)
+
+
 def MatTest():
     A = TMatrix(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16)
     print("A:")
@@ -115,17 +114,12 @@ def MatTest():
     print("Distance A B:")
     print(vB.euclidean_distance(vA))
 
-    #vA.printVec()
-    #A.mult(B)
+    make_trans_mat(1,2,3).printMat()
+    make_rot_mat(45,'x').printMat()
+    make_rot_mat(90,'y').printMat()
+    make_rot_mat(120,'z').printMat()
+    make_scale_mat(1,2,3).printMat()
 
-    #x.printMat()
 
-    #v = Vector4(1,2,3,4)
-
-    #v.printVec()
-
-    #newv = y.mult_vec(v)
-
-    #newv.printVec()
 MatTest()
 
