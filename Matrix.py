@@ -104,6 +104,12 @@ def MatTest():
     print("A*B:")
     A.printMat()
 
+    make_trans_mat(1,2,3).printMat()
+    make_rot_mat(45,'x').printMat()
+    make_rot_mat(90,'y').printMat()
+    make_rot_mat(120,'z').printMat()
+    make_scale_mat(1,2,3).printMat()
+
     vA = Vector4(2,4,6,2)
     print("Vector A:")
     vA.printVec()  
@@ -114,12 +120,8 @@ def MatTest():
     print("Distance A B:")
     print(vB.euclidean_distance(vA))
 
-    make_trans_mat(1,2,3).printMat()
-    make_rot_mat(45,'x').printMat()
-    make_rot_mat(90,'y').printMat()
-    make_rot_mat(120,'z').printMat()
-    make_scale_mat(1,2,3).printMat()
-
-
+    vE = Vector4(1,2,3,1)
+    Vres = A.mult_vec(vE)
+    Vres.printVec()
 MatTest()
 
